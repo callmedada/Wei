@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 21, 2018 at 12:04 AM
+-- Generation Time: Mar 21, 2018 at 09:01 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.5.35
 
@@ -13,8 +13,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cmsdb`
 --
-CREATE DATABASE IF NOT EXISTS `cmsdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cmsdb`;
 
 -- --------------------------------------------------------
 
@@ -22,6 +20,7 @@ USE `cmsdb`;
 -- Table structure for table `ads`
 --
 
+DROP TABLE IF EXISTS `ads`;
 CREATE TABLE `ads` (
   `id` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -43,6 +42,7 @@ INSERT INTO `ads` (`id`, `title`, `image`, `url`, `created`) VALUES
 -- Table structure for table `auth`
 --
 
+DROP TABLE IF EXISTS `auth`;
 CREATE TABLE `auth` (
   `id` int(11) NOT NULL,
   `role_id` int(11) DEFAULT NULL,
@@ -66,6 +66,7 @@ INSERT INTO `auth` (`id`, `role_id`, `nav_ids`, `isadmin`, `created`) VALUES
 -- Table structure for table `banner`
 --
 
+DROP TABLE IF EXISTS `banner`;
 CREATE TABLE `banner` (
   `id` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -91,6 +92,7 @@ INSERT INTO `banner` (`id`, `title`, `image`, `url`, `content`, `created`) VALUE
 -- Table structure for table `catalog`
 --
 
+DROP TABLE IF EXISTS `catalog`;
 CREATE TABLE `catalog` (
   `id` int(11) NOT NULL,
   `pid` int(11) DEFAULT NULL,
@@ -105,6 +107,7 @@ CREATE TABLE `catalog` (
 -- Table structure for table `link`
 --
 
+DROP TABLE IF EXISTS `link`;
 CREATE TABLE `link` (
   `id` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -119,6 +122,7 @@ CREATE TABLE `link` (
 -- Table structure for table `manage`
 --
 
+DROP TABLE IF EXISTS `manage`;
 CREATE TABLE `manage` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
@@ -136,7 +140,7 @@ CREATE TABLE `manage` (
 --
 
 INSERT INTO `manage` (`id`, `name`, `pwd`, `role_id`, `email`, `phone`, `created`, `last_ip`, `last_time`) VALUES
-(1, 'admin', '123456', 2, NULL, NULL, '2018-03-20 22:57:50', '127.0.0.1', '2018-03-21 06:03:50'),
+(1, 'admin', '123456', 2, NULL, NULL, '2018-03-21 05:11:28', '127.0.0.1', '2018-03-21 13:03:28'),
 (18, 'admin1', '1234567', 1, NULL, NULL, '2018-01-17 22:30:29', '127.0.0.1', '2018-01-17 10:01:48'),
 (19, 'test', '123456', 23, NULL, NULL, '2018-02-05 16:18:29', '61.171.221.91', '2018-02-05 11:02:25');
 
@@ -146,6 +150,7 @@ INSERT INTO `manage` (`id`, `name`, `pwd`, `role_id`, `email`, `phone`, `created
 -- Table structure for table `menu`
 --
 
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
@@ -179,6 +184,7 @@ INSERT INTO `menu` (`id`, `name`, `controller`, `pid`, `first`, `play`, `icon`, 
 -- Table structure for table `role`
 --
 
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` char(50) DEFAULT NULL,
@@ -202,6 +208,7 @@ INSERT INTO `role` (`id`, `name`, `isadmin`, `created`) VALUES
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
