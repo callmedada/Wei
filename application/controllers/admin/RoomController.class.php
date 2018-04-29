@@ -25,6 +25,12 @@
             
             echo $data;
         }
+        
+       public function getDistanceAction() {
+            $model = new RoomModel();
+            $data = $model->getDistance();
+            echo $data;
+       }
 
     }
 ?>
