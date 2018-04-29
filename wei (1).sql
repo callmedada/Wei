@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2018-04-29 19:35:45
+-- Generation Time: 2018-04-29 22:18:11
 -- 服务器版本： 10.1.13-MariaDB
 -- PHP Version: 5.5.35
 
@@ -38,8 +38,9 @@ CREATE TABLE `building` (
 --
 
 INSERT INTO `building` (`bid`, `name`, `numberOfRooms`, `googleid`) VALUES
-(1, 'Life Science', 100, ''),
-(2, 'Lassonde Building', 999, 'ChIJix1g5i8uK4gRKCn_A0nn5uM');
+(1, 'Life Sciences Building', 100, 'ChIJHRCqJS4uK4gR9S-sy8rCfKA'),
+(2, 'Lassonde Bldg', 999, 'ChIJix1g5i8uK4gRKCn_A0nn5uM'),
+(3, 'Chemistry', 100, '');
 
 -- --------------------------------------------------------
 
@@ -71,19 +72,6 @@ INSERT INTO `course` (`id`, `section`, `term`, `year`, `courseid`, `time`, `endt
 -- --------------------------------------------------------
 
 --
--- 表的结构 `report`
---
-
-CREATE TABLE `report` (
-  `rid` int(11) NOT NULL,
-  `time` time NOT NULL,
-  `bid` int(255) NOT NULL,
-  `roomnumber` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `room`
 --
 
@@ -100,22 +88,8 @@ CREATE TABLE `room` (
 INSERT INTO `room` (`rid`, `roomnumber`, `bid`) VALUES
 (1, 105, 1),
 (2, 206, 1),
-(3, 101, 2);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `transaction`
---
-
-CREATE TABLE `transaction` (
-  `tid` int(11) NOT NULL,
-  `year` year(4) NOT NULL,
-  `term` varchar(1) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `time` time NOT NULL,
-  `status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(3, 101, 2),
+(4, 222, 3);
 
 --
 -- Indexes for dumped tables
@@ -134,22 +108,10 @@ ALTER TABLE `course`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `report`
---
-ALTER TABLE `report`
-  ADD PRIMARY KEY (`rid`);
-
---
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`rid`);
-
---
--- Indexes for table `transaction`
---
-ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`tid`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
@@ -159,27 +121,17 @@ ALTER TABLE `transaction`
 -- 使用表AUTO_INCREMENT `building`
 --
 ALTER TABLE `building`
-  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- 使用表AUTO_INCREMENT `course`
 --
 ALTER TABLE `course`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- 使用表AUTO_INCREMENT `report`
---
-ALTER TABLE `report`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT;
---
 -- 使用表AUTO_INCREMENT `room`
 --
 ALTER TABLE `room`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- 使用表AUTO_INCREMENT `transaction`
---
-ALTER TABLE `transaction`
-  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
