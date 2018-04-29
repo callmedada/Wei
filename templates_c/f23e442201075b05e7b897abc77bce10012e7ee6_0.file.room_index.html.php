@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-04-07 01:57:55
+/* Smarty version 3.1.30, created on 2018-04-30 03:46:31
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ac7b523e49142_12590378',
+  'unifunc' => 'content_5ae621176bfe43_81030614',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f23e442201075b05e7b897abc77bce10012e7ee6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html',
-      1 => 1523037472,
+      1 => 1525031185,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ac7b523e49142_12590378 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae621176bfe43_81030614 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,7 +69,7 @@ Room/getAvaliableRoom',
                 { checkbox: true, fixed: true },
                 { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
                 { field: 'roomnumber', title: 'Room Number', sort: true, align: 'center' },
-                { field: 'time', title: 'Time', sort: true, align: 'center' }
+                { field: 'distance', title: 'Distance', sort: true, align: 'center' }
               
             ]],
             id: 'idTest',
