@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-14 23:18:35
+/* Smarty version 3.1.30, created on 2018-04-07 01:52:31
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/auth_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa93d4b27f707_91365316',
+  'unifunc' => 'content_5ac7b3dfefeb76_63424824',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2f68d1118def29c21dac8ac8a7d84b8c5526c798' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/auth_index.html',
-      1 => 1519874488,
+      1 => 1522962924,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa93d4b27f707_91365316 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac7b3dfefeb76_63424824 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

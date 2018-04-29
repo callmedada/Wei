@@ -4,7 +4,7 @@ return array(
 	'host' => '127.0.0.1',
 	'user' => 'root',
 	'password' => '',
-	'dbname' => 'cmsdb',
+	'dbname' => 'wei',
 	'port' => '3306',
 	'charset' => 'utf8',
 	'prefix' => '',

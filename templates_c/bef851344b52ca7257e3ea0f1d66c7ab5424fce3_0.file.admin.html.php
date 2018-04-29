@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-15 03:09:16
+/* Smarty version 3.1.30, created on 2018-04-06 08:45:30
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/admin.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa9735c93f373_23529789',
+  'unifunc' => 'content_5ac6c32aa48145_89773505',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bef851344b52ca7257e3ea0f1d66c7ab5424fce3' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/admin.html',
-      1 => 1521054516,
+      1 => 1522962924,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa9735c93f373_23529789 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac6c32aa48145_89773505 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

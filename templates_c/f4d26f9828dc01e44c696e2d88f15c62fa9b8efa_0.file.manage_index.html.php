@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-03-14 23:18:51
+/* Smarty version 3.1.30, created on 2018-04-07 01:52:53
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/manage_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aa93d5b10ff35_61884295',
+  'unifunc' => 'content_5ac7b3f5ccb9d5_45764927',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f4d26f9828dc01e44c696e2d88f15c62fa9b8efa' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/manage_index.html',
-      1 => 1519874488,
+      1 => 1522962924,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aa93d5b10ff35_61884295 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac7b3f5ccb9d5_45764927 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

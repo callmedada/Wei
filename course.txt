@@ -1,0 +1,51 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: 2018-04-29 19:00:14
+-- 服务器版本： 10.1.13-MariaDB
+-- PHP Version: 5.5.35
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `wei`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `course`
+--
+
+CREATE TABLE `course` (
+  `section` varchar(1) NOT NULL,
+  `term` varchar(1) NOT NULL,
+  `year` year(4) NOT NULL,
+  `courseid` int(4) NOT NULL,
+  `time` time NOT NULL,
+  `endtime` time NOT NULL,
+  `rid` int(11) NOT NULL,
+  `days` varchar(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `course`
+--
+
+INSERT INTO `course` (`section`, `term`, `year`, `courseid`, `time`, `endtime`, `rid`, `days`) VALUES
+('A', 'W', 2018, 4443, '13:00:00', '15:00:00', 2, '135'),
+('M', 'W', 2018, 2011, '08:30:00', '10:00:00', 1, '24'),
+('Z', 'W', 2018, 3101, '10:00:00', '16:00:00', 1, '135');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`section`,`term`,`year`,`courseid`);
