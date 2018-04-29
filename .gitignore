@@ -1,2 +1,4 @@
 # Google App Engine generated folder
 appengine-generated/
+phpmyadmin/index.php
+.DS_Store
