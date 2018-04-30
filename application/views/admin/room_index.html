@@ -22,7 +22,7 @@
     </script>
     <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
     <script>
-        var x, y;
+        var x, y, counter = 0;
 function getLocation() {
      console.log(x);
     
@@ -34,7 +34,14 @@ function getLocation() {
         
         if(x === undefined) {
           setTimeout(getLocation, 100);
+            counter++;
+        if(counter == 150) {
+            document.getElementById('gps').innerHTML = "GPS获取错误，请重试"；
+            break;
+        }
       }
+    
+    
         
     if(x != undefined) {
         //real action
