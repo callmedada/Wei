@@ -14,6 +14,7 @@
 -->
         <button class="layui-btn" data-type="refresh"><i class="layui-icon">&#x1002;</i></button>
     </div>
+    
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <script type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
@@ -23,6 +24,7 @@
     <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
     <script>
         var x, y, counter = 0;
+        var timer;
 function getLocation() {
      console.log(x);
     
@@ -33,17 +35,20 @@ function getLocation() {
     }
         
         if(x === undefined) {
-          setTimeout(getLocation, 100);
+          timer = setTimeout(getLocation, 100);
             counter++;
         if(counter == 150) {
-            document.getElementById('gps').innerHTML = "GPS获取错误，请重试"；
-            break;
+            document.getElementById('gps').innerHTML = "GPS获取错误，请重试";
+            return;
         }
       }
     
     
         
     if(x != undefined) {
+        document.getElementById('gps').innerHTML = "";
+        document.getElementById('loader').style.display = 'none';
+        clearTimeout(timer);
         //real action
     layui.use(['table','form'], function() {
         var table = layui.table,
@@ -120,9 +125,34 @@ function showPosition(position) {
     
     
     </script>
-    
-    <p id="gps">GPS info will be shown here</p>
-  
+   
+    <p id="gps">正在获取GPS信息</p>
+<style>
+.loader {
+  border: 13px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 13px solid lightseagreen;
+  width: 20px;
+  height: 20px;
+
+    margin: auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+    <div class="loader" id="loader"></div>
+   
 </body>
 
 </html>

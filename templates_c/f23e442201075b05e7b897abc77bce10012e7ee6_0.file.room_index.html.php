@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 02:18:28
+/* Smarty version 3.1.30, created on 2018-05-01 04:17:09
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae75df46183a9_85981272',
+  'unifunc' => 'content_5ae779c5ac2361_87720397',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f23e442201075b05e7b897abc77bce10012e7ee6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html',
-      1 => 1525112188,
+      1 => 1525119427,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae75df46183a9_85981272 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae779c5ac2361_87720397 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -42,6 +42,7 @@ forbidRight.js"><?php echo '</script'; ?>
 -->
         <button class="layui-btn" data-type="refresh"><i class="layui-icon">&#x1002;</i></button>
     </div>
+    
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
@@ -56,7 +57,8 @@ layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
 >
-        var x, y;
+        var x, y, counter = 0;
+        var timer;
 function getLocation() {
      console.log(x);
     
@@ -67,10 +69,20 @@ function getLocation() {
     }
         
         if(x === undefined) {
-          setTimeout(getLocation, 100);
+          timer = setTimeout(getLocation, 100);
+            counter++;
+        if(counter == 150) {
+            document.getElementById('gps').innerHTML = "GPS获取错误，请重试";
+            return;
+        }
       }
+    
+    
         
     if(x != undefined) {
+        document.getElementById('gps').innerHTML = "";
+        document.getElementById('loader').style.display = 'none';
+        clearTimeout(timer);
         //real action
     layui.use(['table','form'], function() {
         var table = layui.table,
@@ -149,9 +161,34 @@ function showPosition(position) {
     
     <?php echo '</script'; ?>
 >
-    
-    <p id="gps">GPS info will be shown here</p>
-  
+   
+    <p id="gps">正在获取GPS信息</p>
+<style>
+.loader {
+  border: 13px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 13px solid lightseagreen;
+  width: 20px;
+  height: 20px;
+
+    margin: auto;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+    <div class="loader" id="loader"></div>
+   
 </body>
 
 </html><?php }
