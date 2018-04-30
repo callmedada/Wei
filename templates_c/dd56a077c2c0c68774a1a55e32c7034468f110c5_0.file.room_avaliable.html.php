@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 02:18:28
-  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html" */
+/* Smarty version 3.1.30, created on 2018-05-01 03:29:26
+  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae75df46183a9_85981272',
+  'unifunc' => 'content_5ae76e96d2f708_43185197',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'f23e442201075b05e7b897abc77bce10012e7ee6' => 
+    'dd56a077c2c0c68774a1a55e32c7034468f110c5' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html',
-      1 => 1525112188,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html',
+      1 => 1525116558,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae75df46183a9_85981272 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae76e96d2f708_43185197 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,6 +36,7 @@ forbidRight.js"><?php echo '</script'; ?>
 </head>
 <body>
     <div class="layui-btn-group demoTable">
+        
 <!--
     	<button class="layui-btn" data-type="add"><i class="layui-icon">&#xe654;</i></button>
         <button class="layui-btn" data-type="delCheckData"><i class="layui-icon">&#xe640;</i></button>
@@ -46,7 +47,8 @@ forbidRight.js"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
-        <a class="layui-btn layui-btn-xs" lay-event="edit">显示可用房间</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">显示可用房间       
+</a>
        
     <?php echo '</script'; ?>
 >
@@ -54,42 +56,27 @@ forbidRight.js"><?php echo '</script'; ?>
  src="<?php echo @constant('JS');?>
 layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
 >
+ 
+   
     <?php echo '<script'; ?>
 >
-        var x, y;
-function getLocation() {
-     console.log(x);
-    
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
         
-        if(x === undefined) {
-          setTimeout(getLocation, 100);
-      }
-        
-    if(x != undefined) {
-        //real action
-    layui.use(['table','form'], function() {
+layui.use(['table','form'], function() {
         var table = layui.table,
         	form = layui.form;
         
-        
-       
+     
        
         //方法级渲染
         table.render({
             elem: '#table_type',
             url: '<?php echo @constant('ADMIN_SITE');?>
-Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
+Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
+',
             cols: [[
-                
-                { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
-                { field: 'count', title: 'Number of Avaliable Room', sort: true, align: 'center' },
-                { field: 'distance', title: 'Distance', sort: true, align: 'center' },
-                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
+               
+                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
+               
               
             ]],
             id: 'idTest',
@@ -102,29 +89,11 @@ Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
 			console.log(obj);
 		});
         
-        table.on('tool(role)', function(obj) {
-            console.log(obj.data.bid)
-            var data = obj.data;
-            if (obj.event === 'edit') {
-                layer.open({
-                    type: 2,
-                    title: "显示可用房间",
-                    area: ['700px', '450px'],
-                    fixed: false, //不固定
-                    closeBtn: 1,//关闭窗口按钮
-                    maxmin: true,//窗口最大最小化按钮
-                    content: 'showAvaliableRoom?bid='+obj.data.bid
-                });
-            }
-        });
-               
-        
         var $ = layui.$, active = {
             refresh: function() {
                 window.location.reload();
             }
         };
-           
 
        $('.demoTable .layui-btn').on('click', function() {
             var type = $(this).data('type');
@@ -133,25 +102,13 @@ Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
         
     });
     
-}
-}
-    
-    
-function showPosition(position) {
-    y = position.coords.latitude; 
-    x = position.coords.longitude; 
-    
-}
-       
-       
-        window.onload = getLocation();
+
     
     
     <?php echo '</script'; ?>
 >
     
-    <p id="gps">GPS info will be shown here</p>
-  
+   
 </body>
 
 </html><?php }
