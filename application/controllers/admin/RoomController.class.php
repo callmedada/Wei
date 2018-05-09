@@ -45,7 +45,13 @@
             $this->bid = $_GET['bid'];
             $this->display("room_avaliable.html", $this->bid);
         }
+        
+        public function checkInAction() {
+            $model = new RoomModel();
+            $rid = $_GET['rid'];
+            $model->checkIn($rid);
         }
+ }
 
     
 ?>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 03:29:26
+/* Smarty version 3.1.30, created on 2018-05-10 03:41:18
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae76e96d2f708_43185197',
+  'unifunc' => 'content_5af34ede045f26_35988346',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dd56a077c2c0c68774a1a55e32c7034468f110c5' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html',
-      1 => 1525116558,
+      1 => 1525894868,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae76e96d2f708_43185197 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af34ede045f26_35988346 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -47,8 +47,8 @@ forbidRight.js"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
-        <a class="layui-btn layui-btn-xs" lay-event="edit">显示可用房间       
-</a>
+        <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
+        <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
        
     <?php echo '</script'; ?>
 >
@@ -76,7 +76,7 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
             cols: [[
                
                 { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
-               
+                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
               
             ]],
             id: 'idTest',
@@ -94,6 +94,45 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
                 window.location.reload();
             }
         };
+    
+        table.on('tool(role)', function(obj) {
+                console.log(obj)
+                var data = obj.data;
+                if (obj.event === 'checkIn') {
+                    layer.confirm('确定Check In吗？', function(index) {
+                        // obj.del();
+                        layer.close(index);
+                        $.ajax({
+                            url:'checkIn?rid='+<?php echo $_GET['rid'];?>
+ ,
+                            data:{'rid':<?php echo $_GET['rid'];?>
+},
+                            type:'post',
+                            dataType:'json',
+                            success:function(redata){
+                                if(redata.msg == 2){
+                                    layer.msg("Check In Error，请重试");
+                                }else if(redata.msg == 1){
+                                    window.location.href="index";
+                                }else if(redata.msg == 3){
+                                    layer.msg("Unknown Error!!");
+                                }
+                            }
+                        });
+                        return false;
+                    });
+                } else if (obj.event === 'checkOut') {
+                    layer.open({
+                        type: 2,
+                        title: "编辑后台账号",
+                        area: ['700px', '450px'],
+                        fixed: false, //不固定
+                        closeBtn: 1,//关闭窗口按钮
+                        maxmin: true,//窗口最大最小化按钮
+                        content: 'edit?id='+data.id+'&act=edit'
+                    });
+                }
+            });
 
        $('.demoTable .layui-btn').on('click', function() {
             var type = $(this).data('type');

@@ -18,8 +18,8 @@
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <script type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
-        <a class="layui-btn layui-btn-xs" lay-event="edit">显示可用房间       
-</a>
+        <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
+        <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
        
     </script>
     <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
@@ -40,7 +40,7 @@ layui.use(['table','form'], function() {
             cols: [[
                
                 { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
-               
+                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
               
             ]],
             id: 'idTest',
@@ -58,6 +58,43 @@ layui.use(['table','form'], function() {
                 window.location.reload();
             }
         };
+    
+        table.on('tool(role)', function(obj) {
+                console.log(obj)
+                var data = obj.data;
+                if (obj.event === 'checkIn') {
+                    layer.confirm('确定Check In吗？', function(index) {
+                        // obj.del();
+                        layer.close(index);
+                        $.ajax({
+                            url:'checkIn?rid='+{{$smarty.get.rid}} ,
+                            data:{'rid':{{$smarty.get.rid}}},
+                            type:'post',
+                            dataType:'json',
+                            success:function(redata){
+                                if(redata.msg == 2){
+                                    layer.msg("Check In Error，请重试");
+                                }else if(redata.msg == 1){
+                                    window.location.href="index";
+                                }else if(redata.msg == 3){
+                                    layer.msg("Unknown Error!!");
+                                }
+                            }
+                        });
+                        return false;
+                    });
+                } else if (obj.event === 'checkOut') {
+                    layer.open({
+                        type: 2,
+                        title: "编辑后台账号",
+                        area: ['700px', '450px'],
+                        fixed: false, //不固定
+                        closeBtn: 1,//关闭窗口按钮
+                        maxmin: true,//窗口最大最小化按钮
+                        content: 'edit?id='+data.id+'&act=edit'
+                    });
+                }
+            });
 
        $('.demoTable .layui-btn').on('click', function() {
             var type = $(this).data('type');

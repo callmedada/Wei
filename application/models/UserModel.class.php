@@ -80,4 +80,16 @@ class UserModel extends Model{
         $sql = "select role_id from {$this->table} where name = '{$username}'";
         return $this->db->getOne($sql);
     }
+    
+    public function getUserId($username) {
+        $sql = "select id from {$this->table} where name ='{$username}'";
+        $userList = $this->db->getOne($sql);
+        $mngSql = "select id from manage where name ='{$username}'";
+        $manageList = $this->db->getOne($mngSql);
+        if($userList != null) {
+            return $userList;
+        } else {
+            return $manageList;
+        }
+    }
 }

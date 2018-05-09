@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 02:48:51
+/* Smarty version 3.1.30, created on 2018-05-10 03:38:07
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aecab1358ff16_33289373',
+  'unifunc' => 'content_5af34e1fc8d200_42762348',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'afe41a1cc32b4b9a4884e5b7394510414532e119' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_index.html',
-      1 => 1525459726,
+      1 => 1525892513,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aecab1358ff16_33289373 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af34e1fc8d200_42762348 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,6 +39,7 @@ forbidRight.js"><?php echo '</script'; ?>
     	<button class="layui-btn" data-type="add"><i class="layui-icon">&#xe654;</i></button>
         <button class="layui-btn" data-type="delCheckData"><i class="layui-icon">&#xe640;</i></button>
         <button class="layui-btn" data-type="refresh"><i class="layui-icon">&#x1002;</i></button>
+        
     </div>
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <?php echo '<script'; ?>
@@ -73,6 +74,7 @@ Transaction/getInfo',
                 { field: 'in_time', title: 'IN_TIME', sort: false, align: 'center' },
                 { field: 'out_time', title: 'OUT_TIME', sort: true, align: 'center' },
                 { field: 'status', title: 'STATUS', align: 'center' },
+                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
                
             ]],
             id: 'idTest',
@@ -89,12 +91,12 @@ Transaction/getInfo',
             console.log(obj)
             var data = obj.data;
             if (obj.event === 'del') {
-                layer.confirm('确定删除该用户吗？', function(index) {
+                layer.confirm('确定删除该数据吗？', function(index) {
                     // obj.del();
                     layer.close(index);
                     $.ajax({
-                    	url:'del?id='+data.id,
-                    	data:{id:data.id,name:data.name},
+                    	url:'del?id='+data.tid,
+                    	data:{id:data.tid,name:data.name},
                     	type:'post',
                     	dataType:'json',
                     	success:function(redata){
@@ -117,7 +119,7 @@ Transaction/getInfo',
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
                     maxmin: true,//窗口最大最小化按钮
-                    content: 'edit?id='+data.id+'&act=edit'
+                    content: 'edit?tid='+data.tid+'&act=edit'
                 });
             }
         });
@@ -126,7 +128,7 @@ Transaction/getInfo',
         	add: function() {
         		layer.open({
 					type: 2,
-					title: "添加后台账号",
+					title: "添加Transaction",
 					area: ['700px', '450px'],
 					fixed: false, //不固定
 					closeBtn: 1,//关闭窗口按钮
@@ -138,6 +140,7 @@ Transaction/getInfo',
                 window.location.reload();
             },
             delCheckData: function() { //删除选中数据
+                
                 var checkStatus = table.checkStatus('idTest'),
                     data = checkStatus.data;
                 if (data.length == 0) {
@@ -146,13 +149,13 @@ Transaction/getInfo',
                     layer.confirm('确定删除该数据吗？', function(index) {
                     	var ids = [];
 	                    for(var i=0;i<data.length;i++){
-	                    	ids.push(data[i].id);
+	                    	ids.push(data[i].tid);
 	                    }
 	                    $.post('delete',{data:ids},function(redata){
                             if (redata.msg==1) {
                                 window.location.href="index";
                             }else if (redata.msg==2){
-                                layer.confirm("删除的数据当中含有当前登录账号，无法删除！",function(){
+                                layer.confirm("无法删除！",function(){
                                     window.location.reload();
                                 });
                             }
