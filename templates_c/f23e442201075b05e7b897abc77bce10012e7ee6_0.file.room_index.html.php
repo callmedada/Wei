@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-01 04:17:09
+/* Smarty version 3.1.30, created on 2018-05-01 05:21:16
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5ae779c5ac2361_87720397',
+  'unifunc' => 'content_5ae788ccbb4294_37389375',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f23e442201075b05e7b897abc77bce10012e7ee6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html',
-      1 => 1525119427,
+      1 => 1525123274,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ae779c5ac2361_87720397 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ae788ccbb4294_37389375 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -71,8 +71,10 @@ function getLocation() {
         if(x === undefined) {
           timer = setTimeout(getLocation, 100);
             counter++;
-        if(counter == 150) {
+        if(counter == 500) {
             document.getElementById('gps').innerHTML = "GPS获取错误，请重试";
+             document.getElementById('loader').style.display = 'none';
+             clearTimeout(timer);
             return;
         }
       }
@@ -82,7 +84,7 @@ function getLocation() {
     if(x != undefined) {
         document.getElementById('gps').innerHTML = "";
         document.getElementById('loader').style.display = 'none';
-        clearTimeout(timer);
+       
         //real action
     layui.use(['table','form'], function() {
         var table = layui.table,
@@ -165,29 +167,44 @@ function showPosition(position) {
     <p id="gps">正在获取GPS信息</p>
 <style>
 .loader {
-  border: 13px solid #f3f3f3;
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  padding-left: 50%;
+    
+}
+.loader div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+ 
+  border: 6px solid lightseagreen;
   border-radius: 50%;
-  border-top: 13px solid lightseagreen;
-  width: 20px;
-  height: 20px;
-
-    margin: auto;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: lightseagreen transparent transparent transparent;
 }
-
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+.loader div:nth-child(1) {
+  animation-delay: -0.45s;
 }
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.loader div:nth-child(2) {
+  animation-delay: -0.3s;
 }
-</style>
-    <div class="loader" id="loader"></div>
+.loader div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+    </style>
+   <div class="loader" id="loader"><div></div><div></div><div></div><div></div></div>
    
 </body>
 
