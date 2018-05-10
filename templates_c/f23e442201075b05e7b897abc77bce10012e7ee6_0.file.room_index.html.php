@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 02:06:42
+/* Smarty version 3.1.30, created on 2018-05-10 03:27:03
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af48a32055c30_38292521',
+  'unifunc' => 'content_5af34b8744a2d5_17135915',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f23e442201075b05e7b897abc77bce10012e7ee6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html',
-      1 => 1525894356,
+      1 => 1525894018,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af48a32055c30_38292521 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af34b8744a2d5_17135915 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -42,13 +42,13 @@ forbidRight.js"><?php echo '</script'; ?>
 -->
         <button class="layui-btn" data-type="refresh"><i class="layui-icon">&#x1002;</i></button>
     </div>
-    
+
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
-        <a class="layui-btn layui-btn-xs" lay-event="edit">显示可用房间</a>
-       
+        <a class="layui-btn layui-btn-xs" lay-event="edit">显示所有房间</a>
+
     <?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
@@ -61,13 +61,13 @@ layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
         var timer;
 function getLocation() {
      console.log(x);
-    
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
-        
+
         if(x === undefined) {
           timer = setTimeout(getLocation, 100);
             counter++;
@@ -78,92 +78,92 @@ function getLocation() {
             return;
         }
       }
-    
-    
-        
+
+
+
     if(x != undefined) {
         document.getElementById('gps').innerHTML = "";
         document.getElementById('loader').style.display = 'none';
-       
+
         //real action
     layui.use(['table','form'], function() {
         var table = layui.table,
         	form = layui.form;
-        
-        
-       
-       
+
+
+
+
         //方法级渲染
         table.render({
             elem: '#table_type',
             url: '<?php echo @constant('ADMIN_SITE');?>
 Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
             cols: [[
-                
+
                 { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
                 { field: 'count', title: 'Number of Avaliable Room', sort: true, align: 'center' },
                 { field: 'distance', title: 'Distance', sort: true, align: 'center' },
                 { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
-              
+
             ]],
             id: 'idTest',
             page: true,
         });
-    
+
 
         //监听表格复选框选择
 		table.on('checkbox(demo)', function(obj){
 			console.log(obj);
 		});
-        
+
         table.on('tool(role)', function(obj) {
             console.log(obj.data.bid)
             var data = obj.data;
             if (obj.event === 'edit') {
                 layer.open({
                     type: 2,
-                    title: "显示可用房间",
+                    title: "显示所有房间",
                     area: ['700px', '450px'],
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
                     maxmin: true,//窗口最大最小化按钮
-                    content: 'showAvaliableRoom?bid='+obj.data.bid+'&rid='+obj.data.rid
+                    content: 'showAvaliableRoom?bid='+obj.data.bid
                 });
             }
         });
-               
-        
+
+
         var $ = layui.$, active = {
             refresh: function() {
                 window.location.reload();
             }
         };
-           
+
 
        $('.demoTable .layui-btn').on('click', function() {
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-        
+
     });
-    
+
 }
 }
-    
-    
+
+
 function showPosition(position) {
-    y = position.coords.latitude; 
-    x = position.coords.longitude; 
-    
+    y = position.coords.latitude;
+    x = position.coords.longitude;
+
 }
-       
-       
+
+
         window.onload = getLocation();
-    
-    
+
+
     <?php echo '</script'; ?>
 >
-   
+
     <p id="gps">正在获取GPS信息</p>
 <style>
 .loader {
@@ -172,7 +172,7 @@ function showPosition(position) {
   width: 64px;
   height: 64px;
   padding-left: 50%;
-    
+
 }
 .loader div {
   box-sizing: border-box;
@@ -180,7 +180,7 @@ function showPosition(position) {
   position: absolute;
   width: 51px;
   height: 51px;
- 
+
   border: 6px solid lightseagreen;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -205,8 +205,9 @@ function showPosition(position) {
 }
     </style>
    <div class="loader" id="loader"><div></div><div></div><div></div><div></div></div>
-   
+
 </body>
 
-</html><?php }
+</html>
+<?php }
 }

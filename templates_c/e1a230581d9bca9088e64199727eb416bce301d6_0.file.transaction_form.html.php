@@ -1,28 +1,59 @@
+<?php
+/* Smarty version 3.1.30, created on 2018-05-05 03:02:57
+  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_form.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_5aecae61320a44_69259498',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'e1a230581d9bca9088e64199727eb416bce301d6' => 
+    array (
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_form.html',
+      1 => 1525460545,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5aecae61320a44_69259498 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>main</title>
-    <link rel="stylesheet" type="text/css" href="{{$smarty.const.JS}}layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo @constant('JS');?>
+layui/css/layui.css" />
     <style type="text/css">
         form{margin-top: 20px;}
     </style>
-    <script type="text/javascript" src="{{$smarty.const.JS}}forbidRight.js"></script>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo @constant('JS');?>
+forbidRight.js"><?php echo '</script'; ?>
+>
 </head>
 <body>
     <form class="layui-form" action="">
-        {{if $smarty.get.act == "edit"}} <input type="hidden" name="id" value="{{$list.id}}">{{/if}}
+        <?php if ($_GET['act'] == "edit") {?> <input type="hidden" name="id" value="<?php echo $_smarty_tpl->tpl_vars['list']->value['id'];?>
+"><?php }?>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">uid</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="uid" lay-verify="title" {{if $smarty.get.act == "edit"}} readonly {{/if}} autocomplete="off" placeholder="请输入uid" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.name}}"{{/if}}>
+                    <input type="text" name="uid" lay-verify="title" <?php if ($_GET['act'] == "edit") {?> readonly <?php }?> autocomplete="off" placeholder="请输入uid" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">year</label>
             <div class="layui-input-inline">
-                <input type="text" name="year" lay-verify="year" placeholder="请输入year" autocomplete="off" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.pwd}}"{{/if}}>
+                <input type="text" name="year" lay-verify="year" placeholder="请输入year" autocomplete="off" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['pwd'];?>
+"<?php }?>>
             </div>
            
         </div>
@@ -30,7 +61,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">term</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="term" lay-verify="alias" autocomplete="off" placeholder="请输入term" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.alias}}"{{/if}}>
+                    <input type="text" name="term" lay-verify="alias" autocomplete="off" placeholder="请输入term" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['alias'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -38,7 +70,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">date</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="date" lay-verify="major" autocomplete="off" placeholder="请输入date" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.major}}"{{/if}}>
+                    <input type="text" name="date" lay-verify="major" autocomplete="off" placeholder="请输入date" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['major'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -46,7 +79,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">in_time</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="intime" lay-verify="avatar" autocomplete="off" placeholder="请输入in_time" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="intime" lay-verify="avatar" autocomplete="off" placeholder="请输入in_time" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['avatar'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -55,7 +89,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">out_time</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="outtime" lay-verify="avatar" autocomplete="off" placeholder="请输入out_time" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="outtime" lay-verify="avatar" autocomplete="off" placeholder="请输入out_time" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['avatar'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -63,7 +98,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">rid</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="rid" lay-verify="avatar" autocomplete="off" placeholder="请输入rid" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="rid" lay-verify="avatar" autocomplete="off" placeholder="请输入rid" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['avatar'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -71,7 +107,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">status</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="status" lay-verify="avatar" autocomplete="off" placeholder="请输入status" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="status" lay-verify="avatar" autocomplete="off" placeholder="请输入status" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['avatar'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -79,7 +116,8 @@
             <div class="layui-inline">
                 <label class="layui-form-label">手机号</label>
                 <div class="layui-input-inline">
-                    <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.phone}}"{{/if}}>
+                    <input type="tel" name="phone" lay-verify="phone" autocomplete="off" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['phone'];?>
+"<?php }?>>
                 </div>
             </div>
         </div>
@@ -87,24 +125,32 @@
             <div class="layui-inline">
                 <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.email}}"{{/if}}>
+                    <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['email'];?>
+"<?php }?>>
                 </div>
             </div>
         </div> -->
         <div class="layui-form-item">
             <div class="layui-input-block">
-            {{if $smarty.get.act=="add"}}
+            <?php if ($_GET['act'] == "add") {?>
                 <button class="layui-btn" lay-submit="" lay-filter="add">添加</button>
-            {{else if $smarty.get.act=="edit"}}
+            <?php } elseif ($_GET['act'] == "edit") {?>
                 <button class="layui-btn" lay-submit="" lay-filter="edit">确认修改</button>
-            {{/if}}
+            <?php }?>
             </div>
         </div>
     </form>
 </body>
-<script src="{{$smarty.const.JS}}jquery.min.js" charset="utf-8"></script>
-<script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript">
+<?php echo '<script'; ?>
+ src="<?php echo @constant('JS');?>
+jquery.min.js" charset="utf-8"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="<?php echo @constant('JS');?>
+layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript">
     layui.use('form', function(){
         var form = layui.form;
 
@@ -165,5 +211,7 @@
             }
         });
     });
-</script>
-</html>
+<?php echo '</script'; ?>
+>
+</html><?php }
+}

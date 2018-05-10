@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 02:28:03
-  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_index.html" */
+/* Smarty version 3.1.30, created on 2018-04-07 01:52:53
+  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/manage_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af33db3910122_01207119',
+  'unifunc' => 'content_5ac7b3f5ccb9d5_45764927',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'afe41a1cc32b4b9a4884e5b7394510414532e119' => 
+    'f4d26f9828dc01e44c696e2d88f15c62fa9b8efa' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_index.html',
-      1 => 1525890472,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/manage_index.html',
+      1 => 1522962924,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af33db3910122_01207119 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac7b3f5ccb9d5_45764927 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,14 +62,16 @@ layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
         table.render({
             elem: '#table_type',
             url: '<?php echo @constant('ADMIN_SITE');?>
-Room/getOccupiedRoom',
+Manage/getInfo',
             cols: [[
                 { checkbox: true, fixed: true },
-                { field: 'tid', title: 'TID', sort: true, fixed: true, align: 'center' },
-                { field: 'rid', title: 'Room ID', sort: true, fixed: true, align: 'center' },
-                { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
-                { field: 'count', title: 'Number of Avaliable Room', sort: true, align: 'center' },
-
+                { field: 'id', title: 'ID', sort: true, fixed: true, align: 'center' },
+                { field: 'name', title: '账号', sort: true, align: 'center' },
+                { field: 'role_id', title: '角色', sort: true, align: 'center' },
+                { field: 'last_ip', title: '最后登录IP', sort: true, align: 'center' },
+                { field: 'last_time', title: '最后登录时间', sort: true, align: 'center' },
+                { field: 'created', title: '创建时间', align: 'center' },
+                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
             ]],
             id: 'idTest',
             page: true,
@@ -82,10 +84,9 @@ Room/getOccupiedRoom',
 
         //监听工具条
         table.on('tool(role)', function(obj) {
-            console.log(obj)
             var data = obj.data;
             if (obj.event === 'del') {
-                layer.confirm('确定删除该用户吗？', function(index) {
+                layer.confirm('确定删除该数据吗？', function(index) {
                     // obj.del();
                     layer.close(index);
                     $.ajax({
@@ -162,12 +163,11 @@ Room/getOccupiedRoom',
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-
+        
     });
     <?php echo '</script'; ?>
 >
 </body>
 
-</html>
-<?php }
+</html><?php }
 }

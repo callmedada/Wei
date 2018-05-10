@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 02:28:03
-  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_index.html" */
+/* Smarty version 3.1.30, created on 2018-04-07 01:37:24
+  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/role_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af33db3910122_01207119',
+  'unifunc' => 'content_5ac7b054ba4901_71740988',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'afe41a1cc32b4b9a4884e5b7394510414532e119' => 
+    '46094db7e065cb13d6788ff4460b219ce5b18b81' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/transaction_index.html',
-      1 => 1525890472,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/role_index.html',
+      1 => 1522962926,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af33db3910122_01207119 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac7b054ba4901_71740988 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -62,14 +62,13 @@ layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
         table.render({
             elem: '#table_type',
             url: '<?php echo @constant('ADMIN_SITE');?>
-Room/getOccupiedRoom',
+Role/getInfo',
             cols: [[
                 { checkbox: true, fixed: true },
-                { field: 'tid', title: 'TID', sort: true, fixed: true, align: 'center' },
-                { field: 'rid', title: 'Room ID', sort: true, fixed: true, align: 'center' },
-                { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
-                { field: 'count', title: 'Number of Avaliable Room', sort: true, align: 'center' },
-
+                { field: 'id', title: 'ID', sort: true, fixed: true, align: 'center' },
+                { field: 'name', title: '角色名称', sort: true, align: 'center' },
+                { field: 'created', title: '创建时间', align: 'center' },
+                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
             ]],
             id: 'idTest',
             page: true,
@@ -82,25 +81,23 @@ Room/getOccupiedRoom',
 
         //监听工具条
         table.on('tool(role)', function(obj) {
-            console.log(obj)
             var data = obj.data;
             if (obj.event === 'del') {
-                layer.confirm('确定删除该用户吗？', function(index) {
+                layer.confirm('确定删除该数据吗？', function(index) {
                     // obj.del();
                     layer.close(index);
                     $.ajax({
                     	url:'del?id='+data.id,
-                    	data:{id:data.id,name:data.name},
+                    	data:{id:data.id},
                     	type:'post',
                     	dataType:'json',
                     	success:function(redata){
-                            if(redata.msg == 2){
-                    			layer.msg("删除失败，请重试");
+                    		if(redata.msg == 2){
+                    			layer.alert("删除失败，请重试");
+                    			layer.close(index);
                     		}else if(redata.msg == 1){
                     			window.location.href="index";
-                    		}else if(redata.msg == 3){
-                                layer.msg("该账号为当前登录账号，无法删除！");
-                            }
+                    		}
                     	}
                     });
                     return false;
@@ -108,7 +105,7 @@ Room/getOccupiedRoom',
             } else if (obj.event === 'edit') {
                 layer.open({
                     type: 2,
-                    title: "编辑后台账号",
+                    title: "编辑角色",
                     area: ['700px', '450px'],
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
@@ -122,7 +119,7 @@ Room/getOccupiedRoom',
         	add: function() {
         		layer.open({
 					type: 2,
-					title: "添加后台账号",
+					title: "添加角色",
 					area: ['700px', '450px'],
 					fixed: false, //不固定
 					closeBtn: 1,//关闭窗口按钮
@@ -145,14 +142,11 @@ Room/getOccupiedRoom',
 	                    	ids.push(data[i].id);
 	                    }
 	                    $.post('delete',{data:ids},function(redata){
-                            if (redata.msg==1) {
+	                    	if (redata.msg==1) {
                                 window.location.href="index";
-                            }else if (redata.msg==2){
-                                layer.confirm("删除的数据当中含有当前登录账号，无法删除！",function(){
-                                    window.location.reload();
-                                });
                             }
 	                    },'json');
+                        return false;
                     });
                 }
             }
@@ -162,12 +156,11 @@ Room/getOccupiedRoom',
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-
+        
     });
     <?php echo '</script'; ?>
 >
 </body>
 
-</html>
-<?php }
+</html><?php }
 }

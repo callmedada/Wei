@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 02:51:34
-  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/user_form.html" */
+/* Smarty version 3.1.30, created on 2018-04-07 01:53:11
+  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/manage_form.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aecabb66a1637_65203778',
+  'unifunc' => 'content_5ac7b4074151b1_88425404',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'ee6a4dc9ce04d89636f6ffa7aca968480816c36c' => 
+    'c0f450195a4c6c19b045364890751570d15f3879' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/user_form.html',
-      1 => 1522962926,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/manage_form.html',
+      1 => 1522962924,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aecabb66a1637_65203778 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5ac7b4074151b1_88425404 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -44,7 +44,7 @@ forbidRight.js"><?php echo '</script'; ?>
             <div class="layui-inline">
                 <label class="layui-form-label">账号</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="name" lay-verify="title" <?php if ($_GET['act'] == "edit") {?> readonly <?php }?> autocomplete="off" placeholder="请输入账号" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
+                    <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入账号" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 "<?php }?>>
                 </div>
             </div>
@@ -52,39 +52,11 @@ forbidRight.js"><?php echo '</script'; ?>
         <div class="layui-form-item">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-inline">
-                <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['pwd'];?>
+                <input type="password" name="pwd" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['pwd'];?>
 "<?php }?>>
             </div>
             <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
         </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">昵称</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="alias" lay-verify="alias" autocomplete="off" placeholder="请输入昵称" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['alias'];?>
-"<?php }?>>
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">专业</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="major" lay-verify="major" autocomplete="off" placeholder="请输入major" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['major'];?>
-"<?php }?>>
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">Avatar</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="avatar" lay-verify="avatar" autocomplete="off" placeholder="头像" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['avatar'];?>
-"<?php }?>>
-                </div>
-            </div>
-        </div>
-        
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">角色</label>
@@ -198,16 +170,13 @@ layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
                 dataType:'json',
                 success:function(redata){
                     if (redata.msg == 1) {
-                        layer.alert("修改成功");
-                        // window.parent.location.reload();//刷新父页面
+                        window.parent.location.reload();//刷新父页面
                         layer.closeAll('iframe');//关闭弹窗
                     }else if(redata.msg == 2){
                         layer.alert("修改失败，请重试！");
                         layer.closeAll('iframe');//关闭弹窗
                     }else if(redata.msg == 3){
                         layer.msg("修改后的账号已存在，请重新编辑！");
-                    }else if(redata.msg == 4){
-                        layer.msg("没有记录被修改");
                     }
                 }
             });

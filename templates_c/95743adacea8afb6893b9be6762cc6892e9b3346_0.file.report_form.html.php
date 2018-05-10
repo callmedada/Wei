@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-05 02:51:34
-  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/user_form.html" */
+/* Smarty version 3.1.30, created on 2018-05-05 02:27:33
+  from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/report_form.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5aecabb66a1637_65203778',
+  'unifunc' => 'content_5aeca61553e0f1_42373058',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'ee6a4dc9ce04d89636f6ffa7aca968480816c36c' => 
+    '95743adacea8afb6893b9be6762cc6892e9b3346' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/user_form.html',
-      1 => 1522962926,
+      0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/report_form.html',
+      1 => 1525458305,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5aecabb66a1637_65203778 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5aeca61553e0f1_42373058 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,9 +42,9 @@ forbidRight.js"><?php echo '</script'; ?>
 "><?php }?>
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">账号</label>
+                <label class="layui-form-label">Year</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="name" lay-verify="title" <?php if ($_GET['act'] == "edit") {?> readonly <?php }?> autocomplete="off" placeholder="请输入账号" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
+                    <input type="text" name="name" lay-verify="title" <?php if ($_GET['act'] == "edit") {?> readonly <?php }?> autocomplete="off" placeholder="输入Year" class="layui-input" <?php if ($_GET['act'] == "edit") {?> value="<?php echo $_smarty_tpl->tpl_vars['list']->value['name'];?>
 "<?php }?>>
                 </div>
             </div>
