@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-10 03:41:18
+/* Smarty version 3.1.30, created on 2018-05-11 02:27:43
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af34ede045f26_35988346',
+  'unifunc' => 'content_5af48f1f942f75_95705200',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dd56a077c2c0c68774a1a55e32c7034468f110c5' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html',
-      1 => 1525894868,
+      1 => 1525976839,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af34ede045f26_35988346 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af48f1f942f75_95705200 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -46,10 +46,20 @@ forbidRight.js"><?php echo '</script'; ?>
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
-        <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+         <?php if ($_SESSION['checked'] == false) {?> 
         <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
+        <?php } else { ?>
+        <a class="layui-btn layui-btn-xs layui-disabled">Check In</a>
+        <?php }?>
+
+        <?php if ($_SESSION['checked'] == true) {?> 
+      
         <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
-       
+        <?php } else { ?>
+
+         <a class="layui-btn layui-btn-xs layui-disabled">Check Out</a>
+        <?php }?>
+        
     <?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
@@ -75,7 +85,7 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
 ',
             cols: [[
                
-                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
+                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' , style: 'background-color: #5FB878'},
                 { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
               
             ]],
@@ -107,13 +117,13 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
  ,
                             data:{'rid':<?php echo $_GET['rid'];?>
 },
-                            type:'post',
+                            type:'POST',
                             dataType:'json',
                             success:function(redata){
                                 if(redata.msg == 2){
                                     layer.msg("Check In Error，请重试");
                                 }else if(redata.msg == 1){
-                                    window.location.href="index";
+                                    window.location.reload();
                                 }else if(redata.msg == 3){
                                     layer.msg("Unknown Error!!");
                                 }
@@ -122,14 +132,29 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
                         return false;
                     });
                 } else if (obj.event === 'checkOut') {
-                    layer.open({
-                        type: 2,
-                        title: "编辑后台账号",
-                        area: ['700px', '450px'],
-                        fixed: false, //不固定
-                        closeBtn: 1,//关闭窗口按钮
-                        maxmin: true,//窗口最大最小化按钮
-                        content: 'edit?id='+data.id+'&act=edit'
+                   layer.confirm('确定Check Out吗？', function(index) {
+                        // obj.del();
+                        layer.close(index);
+                       console.log(data);
+                        $.ajax({
+                            url:'checkOut?rid=' + <?php echo $_GET['rid'];?>
+,
+                            //<?php echo $_GET['rid'];?>
+
+                            data:{'rid': "1"},
+                            type:'POST',
+                            dataType:'json',
+                            success:function(redata){
+                                if(redata.msg == 2){
+                                    layer.msg("你只能Check Out当前Check In房间");
+                                }else if(redata.msg == 1){
+                                     window.location.reload();
+                                }else if(redata.msg == 3){
+                                    layer.msg("Unknown Error!!");
+                                }
+                            }
+                        });
+                        return false;
                     });
                 }
             });
