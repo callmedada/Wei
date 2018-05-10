@@ -45,6 +45,11 @@ class TransactionModel extends Model{
         return $this->db->getAll($sql);
     }
     
+    public function getTid($rid, $time) {
+        $sql = "select tid from {$this->table} where rid = {$rid} and in_time = '{$time}'";
+        return $this->db->getOne($sql);
+    }
+    
      public function getTotal(){
         $sql = "select count(*) as total from {$this->table}";
         return $this->db->getOne($sql);
@@ -85,7 +90,7 @@ class TransactionModel extends Model{
             $data['rid'] = $rid;
             $data['year'] = $this->year;
             $data['term'] = $this->term;
-            $data['in_time'] = $this->getTime();
+            $data['in_time'] = $_SESSION['checkin_time'];
             $data['status'] = 1;
             $data['date'] = $this->getDate();
            return $this->insert($data);
@@ -95,6 +100,11 @@ class TransactionModel extends Model{
          $userModel = new UserModel();
          $username = $_SESSION['username'];
          $data = array();
+         $data['tid'] = $this->getTid($_SESSION['rid'], $_SESSION['checkin_time']);
+         $data['uid'] = $userModel->getUserId($username);
+         $data['out_time'] = $this->getTime();
+         $data['status'] = 2;
+         return $this->update($data);
          
     }
     

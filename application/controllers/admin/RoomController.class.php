@@ -50,6 +50,18 @@
             $model = new RoomModel();
             $rid = $_GET['rid'];
             $model->checkIn($rid);
+             echo json_encode(array('msg'=>1));
+        }
+        
+        public function checkOutAction() {
+            if($_SESSION["checked"] == true && $_SESSION['rid'] == $_GET['rid']) {
+                $model = new RoomModel();
+                $model->checkOut();
+                $_SESSION['checked'] = false;
+                echo json_encode(array('msg'=>1));
+            } else {
+                echo json_encode(array('msg'=>2));
+            }
         }
  }
 

@@ -9,7 +9,7 @@ class RoomModel extends Model{
         
         date_default_timezone_set('America/New_York');
         $this->time = date('H:i:s');
-
+        return $this->time;
     }
     
     public function getDay() {
@@ -85,8 +85,18 @@ class RoomModel extends Model{
     
     public function checkIn($rid) {
         $transactionModel = new TransactionModel();
+        $_SESSION['rid'] = $rid; 
+        $_SESSION['checked'] = true;
+        $_SESSION['checkin_time'] = $this->getTime();
         $transactionModel->checkIn($rid);
+       
     }
     
+    public function checkOut() {
+        
+            $transactionModel = new TransactionModel();
+            $transactionModel->checkOut();
+        
+    }
     
 }

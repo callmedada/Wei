@@ -1,10 +1,38 @@
+<?php
+/* Smarty version 3.1.30, created on 2018-05-10 09:16:53
+  from "C:\xampp\htdocs\application\views\admin\room_avaliable.html" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_5af39d85886571_21645267',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'eb99588a60e6ad3fb6eea0fd5b25a0c0a9d5d9cd' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\application\\views\\admin\\room_avaliable.html',
+      1 => 1525915012,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5af39d85886571_21645267 (Smarty_Internal_Template $_smarty_tpl) {
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>main</title>
-    <link rel="stylesheet" type="text/css" href="{{$smarty.const.JS}}layui/css/layui.css" />
-    <script type="text/javascript" src="{{$smarty.const.JS}}forbidRight.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo @constant('JS');?>
+layui/css/layui.css" />
+    <?php echo '<script'; ?>
+ type="text/javascript" src="<?php echo @constant('JS');?>
+forbidRight.js"><?php echo '</script'; ?>
+>
 </head>
 <body>
     <div class="layui-btn-group demoTable">
@@ -16,26 +44,32 @@
         <button class="layui-btn" data-type="refresh"><i class="layui-icon">&#x1002;</i></button>
     </div>
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
-    <script type="text/html" id="barDemo">
-         {{if $smarty.session.checked == false}} 
+    <?php echo '<script'; ?>
+ type="text/html" id="barDemo">
+         <?php if ($_SESSION['checked'] == false) {?> 
         <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
-        {{else}}
+        <?php } else { ?>
         <a class="layui-btn layui-btn-xs layui-disabled">Check In</a>
-        {{/if}}
+        <?php }?>
 
-        {{if $smarty.session.checked == true}} 
+        <?php if ($_SESSION['checked'] == true) {?> 
       
         <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
-        {{else}}
+        <?php } else { ?>
 
          <a class="layui-btn layui-btn-xs layui-disabled">Check Out</a>
-        {{/if}}
+        <?php }?>
         
-    </script>
-    <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
+    <?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="<?php echo @constant('JS');?>
+layui/layui.js" charset="utf-8"><?php echo '</script'; ?>
+>
  
    
-    <script>
+    <?php echo '<script'; ?>
+>
         
 layui.use(['table','form'], function() {
         var table = layui.table,
@@ -46,7 +80,9 @@ layui.use(['table','form'], function() {
         //方法级渲染
         table.render({
             elem: '#table_type',
-            url: '{{$smarty.const.ADMIN_SITE}}Room/getAvaliableRoom?bid={{$smarty.get.bid}}',
+            url: '<?php echo @constant('ADMIN_SITE');?>
+Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
+',
             cols: [[
                
                 { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
@@ -77,8 +113,10 @@ layui.use(['table','form'], function() {
                         // obj.del();
                         layer.close(index);
                         $.ajax({
-                            url:'checkIn?rid='+{{$smarty.get.rid}} ,
-                            data:{'rid':{{$smarty.get.rid}}},
+                            url:'checkIn?rid='+<?php echo $_GET['rid'];?>
+ ,
+                            data:{'rid':<?php echo $_GET['rid'];?>
+},
                             type:'POST',
                             dataType:'json',
                             success:function(redata){
@@ -99,8 +137,10 @@ layui.use(['table','form'], function() {
                         layer.close(index);
                        console.log(data);
                         $.ajax({
-                            url:'checkOut?rid=' + {{$smarty.get.rid}},
-                            //{{$smarty.get.rid}}
+                            url:'checkOut?rid=' + <?php echo $_GET['rid'];?>
+,
+                            //<?php echo $_GET['rid'];?>
+
                             data:{'rid': "1"},
                             type:'POST',
                             dataType:'json',
@@ -129,9 +169,11 @@ layui.use(['table','form'], function() {
 
     
     
-    </script>
+    <?php echo '</script'; ?>
+>
     
    
 </body>
 
-</html>
+</html><?php }
+}
