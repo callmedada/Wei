@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 02:27:43
+/* Smarty version 3.1.30, created on 2018-05-11 03:22:06
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af48f1f942f75_95705200',
+  'unifunc' => 'content_5af49bdec7e8c3_98537894',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dd56a077c2c0c68774a1a55e32c7034468f110c5' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html',
-      1 => 1525976839,
+      1 => 1525980124,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af48f1f942f75_95705200 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af49bdec7e8c3_98537894 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -76,17 +76,20 @@ layui.use(['table','form'], function() {
         	form = layui.form;
         
      
-       
+       console.log(obj);
         //方法级渲染
         table.render({
+            
             elem: '#table_type',
             url: '<?php echo @constant('ADMIN_SITE');?>
-Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
+Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
 ',
+            id:'rid',
             cols: [[
-               
-                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' , style: 'background-color: #5FB878'},
+              
+                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
                 { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
+                
               
             ]],
             id: 'idTest',
@@ -106,7 +109,7 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
         };
     
         table.on('tool(role)', function(obj) {
-                console.log(obj)
+                console.log(obj.data.rid);
                 var data = obj.data;
                 if (obj.event === 'checkIn') {
                     layer.confirm('确定Check In吗？', function(index) {
@@ -137,8 +140,7 @@ Room/getAvaliableRoom?bid=<?php echo $_GET['bid'];?>
                         layer.close(index);
                        console.log(data);
                         $.ajax({
-                            url:'checkOut?rid=' + <?php echo $_GET['rid'];?>
-,
+                            url:'checkOut?rid=' + data.rid,
                             //<?php echo $_GET['rid'];?>
 
                             data:{'rid': "1"},

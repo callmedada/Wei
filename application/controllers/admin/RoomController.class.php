@@ -12,13 +12,26 @@
             $this->display("room_index.html");
         }
         
-        public function getAvaliableRoomNumberAction(){
+        public function getOccupiedRoomAction(){
+            $model = new RoomModel();
+            $list = $model->getOccupiedRoom();
+            $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
+            echo $data;
+        }
+        public function getAllRoomAction(){
+            $model = new RoomModel();
+            $list = $model->getAllRoom();
+            $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
+            echo $data;
+        }
+        
+        public function getAvailableRoomNumberAction(){
             $curPage = isset($_GET['page'])?$_GET['page']:1;
             $limit = isset($_GET['limit'])?$_GET['limit']:10;
             $start = ($curPage-1)*$limit;
 
             $model = new RoomModel();
-            $list = $model->getAvaliableRoomNumber();
+            $list = $model->getAvailableRoomNumber();
             $total = $model->getTotal();
             asort($list);
             $data = json_encode(array("count"=>$total,"msg"=>"","code"=>0,"data"=>$list));
@@ -34,14 +47,14 @@
             echo $data;
        }
         
-        public function getAvaliableRoomAction(){
+        public function getAvailableRoomAction(){
             $model = new RoomModel();
-            $list = $model->getAvaliableRoom();
-            $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
+            $list = $model->getAvailableRoom();
+            $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>1,"data"=>$list));
             echo $data;
             }
         
-        public function showAvaliableRoomAction() {
+        public function showAvailableRoomAction() {
             $this->bid = $_GET['bid'];
             $this->display("room_avaliable.html", $this->bid);
         }

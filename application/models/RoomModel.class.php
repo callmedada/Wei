@@ -18,18 +18,41 @@ class RoomModel extends Model{
         $this->day = date('w');
 
     }
+
+     public function getOccupiedRoom(){
+      $this->getTime();
+      $bid = $_GET['bid'];
+      // $bid = "1";
+      $sql = "SELECT r.rid, b.name as count,r.roomnumber as roomnumber
+      FROM building b, room r
+      WHERE b.bid = r.bid and r.rid
+      in (SELECT t.rid from transaction t, room r
+        WHERE t.in_time <= '".$this->time."' and t.out_time >= '".$this->time."') and b.bid = ".$bid;
+        $sqlArray = $this->db->getAll($sql);
+        // for($i = 0; $i < sizeof($sqlArray); $i++) {
+        //   $sqlArray[$i]=$sqlArray;
+        // }
+  // var_dump($sqlArray);
+        return $sqlArray;
+    }
+
+    public function getAllRoom(){
+        return  $this->getAvailable() + $this->getOccupiedRoom();
+        // return $this->getOccupiedRoom();
+    }
     
-    public function getAvaliableRoom() {
+    public function getAvailableRoom() {
         $this->getTime();
         $this->getDay();
         $bid = $_GET['bid'];
-        $sql = "SELECT DISTINCT r.roomnumber as roomnumber FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
+        $sql = "SELECT DISTINCT r.roomnumber as roomnumber, r.rid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
         $sqlArray = $this->db->getAll($sql);
+     
         return $sqlArray;
     }
     
     
-    public function getAvaliableRoomNumber(){
+    public function getAvailableRoomNumber(){
         $this->getDistance();
         $this->getTime();
         $this->getDay();

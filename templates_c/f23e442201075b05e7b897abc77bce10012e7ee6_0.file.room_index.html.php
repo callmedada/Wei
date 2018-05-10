@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 02:06:42
+/* Smarty version 3.1.30, created on 2018-05-11 03:11:54
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af48a32055c30_38292521',
+  'unifunc' => 'content_5af4997a2162a1_87901914',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f23e442201075b05e7b897abc77bce10012e7ee6' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_index.html',
-      1 => 1525894356,
+      1 => 1525979511,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af48a32055c30_38292521 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af4997a2162a1_87901914 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -97,7 +97,7 @@ function getLocation() {
         table.render({
             elem: '#table_type',
             url: '<?php echo @constant('ADMIN_SITE');?>
-Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
+Room/getAvailableRoomNumber?'+'x=' + x + "&y=" + y ,
             cols: [[
                 
                 { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
@@ -127,7 +127,7 @@ Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
                     maxmin: true,//窗口最大最小化按钮
-                    content: 'showAvaliableRoom?bid='+obj.data.bid+'&rid='+obj.data.rid
+                    content: 'showAvailableRoom?bid='+obj.data.bid+'&rid='+obj.data.rid
                 });
             }
         });

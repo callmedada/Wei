@@ -62,7 +62,7 @@ function getLocation() {
         //方法级渲染
         table.render({
             elem: '#table_type',
-            url: '{{$smarty.const.ADMIN_SITE}}Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
+            url: '{{$smarty.const.ADMIN_SITE}}Room/getAvailableRoomNumber?'+'x=' + x + "&y=" + y ,
             cols: [[
                 
                 { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
@@ -92,7 +92,7 @@ function getLocation() {
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
                     maxmin: true,//窗口最大最小化按钮
-                    content: 'showAvaliableRoom?bid='+obj.data.bid+'&rid='+obj.data.rid
+                    content: 'showAvailableRoom?bid='+obj.data.bid+'&rid='+obj.data.rid
                 });
             }
         });
