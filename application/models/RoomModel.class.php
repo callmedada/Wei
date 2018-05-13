@@ -37,7 +37,7 @@ class RoomModel extends Model{
     }
 
     public function getAllRoom(){
-        return  $this->getAvailable() + $this->getOccupiedRoom();
+        return  $this->getAvailableRoom() + $this->getOccupiedRoom();
         // return $this->getOccupiedRoom();
     }
     
@@ -109,17 +109,14 @@ class RoomModel extends Model{
     
     public function checkIn($rid) {
         $transactionModel = new TransactionModel();
-        $_SESSION['rid'] = $rid; 
-        $_SESSION['checked'] = true;
-        $_SESSION['checkin_time'] = $this->getTime();
         $transactionModel->checkIn($rid);
        
     }
     
-    public function checkOut() {
+    public function checkOut($rid) {
         
             $transactionModel = new TransactionModel();
-            $transactionModel->checkOut();
+            $transactionModel->checkOut($rid);
         
     }
     

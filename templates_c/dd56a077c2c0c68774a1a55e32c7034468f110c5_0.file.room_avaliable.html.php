@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-11 03:22:06
+/* Smarty version 3.1.30, created on 2018-05-14 01:35:06
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af49bdec7e8c3_98537894',
+  'unifunc' => 'content_5af8774a3be3f9_63472702',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dd56a077c2c0c68774a1a55e32c7034468f110c5' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html',
-      1 => 1525980124,
+      1 => 1526232902,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af49bdec7e8c3_98537894 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5af8774a3be3f9_63472702 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -46,19 +46,10 @@ forbidRight.js"><?php echo '</script'; ?>
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
-         <?php if ($_SESSION['checked'] == false) {?> 
         <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
-        <?php } else { ?>
-        <a class="layui-btn layui-btn-xs layui-disabled">Check In</a>
-        <?php }?>
 
-        <?php if ($_SESSION['checked'] == true) {?> 
       
         <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
-        <?php } else { ?>
-
-         <a class="layui-btn layui-btn-xs layui-disabled">Check Out</a>
-        <?php }?>
         
     <?php echo '</script'; ?>
 >
@@ -76,7 +67,6 @@ layui.use(['table','form'], function() {
         	form = layui.form;
         
      
-       console.log(obj);
         //方法级渲染
         table.render({
             
@@ -87,19 +77,22 @@ Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
             id:'rid',
             cols: [[
               
-                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
+                { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center'},
                 { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
                 
-              
+              	
             ]],
-            id: 'idTest',
             page: true,
         });
+    
+    
     
 
         //监听表格复选框选择
 		table.on('checkbox(demo)', function(obj){
 			console.log(obj);
+            
+            
 		});
         
         var $ = layui.$, active = {
@@ -109,22 +102,21 @@ Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
         };
     
         table.on('tool(role)', function(obj) {
-                console.log(obj.data.rid);
+               
                 var data = obj.data;
+                console.log(data.rid);
                 if (obj.event === 'checkIn') {
                     layer.confirm('确定Check In吗？', function(index) {
                         // obj.del();
                         layer.close(index);
                         $.ajax({
-                            url:'checkIn?rid='+<?php echo $_GET['rid'];?>
- ,
-                            data:{'rid':<?php echo $_GET['rid'];?>
-},
+                            url:'checkIn?rid='+data.rid ,
+                            data:{'rid':data.rid},
                             type:'POST',
                             dataType:'json',
                             success:function(redata){
                                 if(redata.msg == 2){
-                                    layer.msg("Check In Error，请重试");
+                                    layer.msg("你还没有Check Out");
                                 }else if(redata.msg == 1){
                                     window.location.reload();
                                 }else if(redata.msg == 3){
@@ -138,12 +130,12 @@ Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
                    layer.confirm('确定Check Out吗？', function(index) {
                         // obj.del();
                         layer.close(index);
-                       console.log(data);
+                       
                         $.ajax({
                             url:'checkOut?rid=' + data.rid,
                             //<?php echo $_GET['rid'];?>
 
-                            data:{'rid': "1"},
+                            data:{'rid': data.rid},
                             type:'POST',
                             dataType:'json',
                             success:function(redata){
@@ -152,7 +144,7 @@ Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
                                 }else if(redata.msg == 1){
                                      window.location.reload();
                                 }else if(redata.msg == 3){
-                                    layer.msg("Unknown Error!!");
+                                    layer.msg("你还没有Check In");
                                 }
                             }
                         });
@@ -173,7 +165,6 @@ Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
     
     <?php echo '</script'; ?>
 >
-    
    
 </body>
 

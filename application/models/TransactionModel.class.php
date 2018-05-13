@@ -45,8 +45,8 @@ class TransactionModel extends Model{
         return $this->db->getAll($sql);
     }
     
-    public function getTid($rid, $time) {
-        $sql = "select tid from {$this->table} where rid = {$rid} and in_time = '{$time}'";
+    public function getTid($rid) {
+        $sql = "select tid from {$this->table} where rid = {$rid} and status = '1'";
         return $this->db->getOne($sql);
     }
     
@@ -96,16 +96,35 @@ class TransactionModel extends Model{
            return $this->insert($data);
         }
     
-    public function checkOut() {
+    public function checkOut($rid) {
          $userModel = new UserModel();
          $username = $_SESSION['username'];
+		 
          $data = array();
-         $data['tid'] = $this->getTid($_SESSION['rid'], $_SESSION['checkin_time']);
+         $data['tid'] = $this->getTid($rid);
          $data['uid'] = $userModel->getUserId($username);
          $data['out_time'] = $this->getTime();
          $data['status'] = 2;
          return $this->update($data);
          
     }
+	
+	public function getStatus($username) {
+		$userModel = new UserModel();
+		$uid = $userModel->getUserId($username);
+		$sql = "select status from transaction where uid={$uid} and out_time = '0:0:0'";
+		if ($this->db->getOne($sql) == false) {
+			return '2';
+		} else {
+			return '1';
+		}
+	}
+	
+	public function getCheckedRoom($username) {
+		$userModel = new UserModel();
+		$uid = $userModel->getUserId($username);
+		$sql = "select rid from transaction where uid={$uid} and status = 1";
+		return $this->db->getOne($sql);
+	}
     
 }
