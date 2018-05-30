@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-05-14 01:35:06
+/* Smarty version 3.1.30, created on 2018-05-31 04:26:11
   from "/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5af8774a3be3f9_63472702',
+  'unifunc' => 'content_5b0f08e33b7bb4_42484424',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dd56a077c2c0c68774a1a55e32c7034468f110c5' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/application/views/admin/room_avaliable.html',
-      1 => 1526232902,
+      1 => 1527711953,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5af8774a3be3f9_63472702 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b0f08e33b7bb4_42484424 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -47,9 +47,8 @@ forbidRight.js"><?php echo '</script'; ?>
     <?php echo '<script'; ?>
  type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
-
-      
         <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
+		<a class="layui-btn layui-btn-xs" lay-event="report">Report</a>
         
     <?php echo '</script'; ?>
 >
@@ -150,7 +149,10 @@ Room/getAvailableRoom?bid=<?php echo $_GET['bid'];?>
                         });
                         return false;
                     });
-                }
+                } else if (obj.event === 'report') {
+					window.location.href = "showReportForm?b= <?php echo $_GET['b'];?>
+&r=" + data.roomnumber+"&rid="+data.rid;
+				}
             });
 
        $('.demoTable .layui-btn').on('click', function() {

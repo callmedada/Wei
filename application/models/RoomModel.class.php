@@ -19,7 +19,7 @@ class RoomModel extends Model{
 
     }
 
-     public function getOccupiedRoom(){
+    public function getOccupiedRoom(){
       $this->getTime();
       $bid = $_GET['bid'];
       // $bid = "1";
@@ -45,7 +45,7 @@ class RoomModel extends Model{
         $this->getTime();
         $this->getDay();
         $bid = $_GET['bid'];
-        $sql = "SELECT DISTINCT r.roomnumber as roomnumber, r.rid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
+        $sql = "SELECT DISTINCT r.roomnumber as roomnumber, r.rid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.end_time <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
         $sqlArray = $this->db->getAll($sql);
      
         return $sqlArray;
@@ -57,7 +57,7 @@ class RoomModel extends Model{
         $this->getTime();
         $this->getDay();
         $_SESSION['checked'] = false;
-        $sql = "SELECT r.rid,b.name, r.roomnumber, COUNT(b.bid) as count, b.bid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and b.bid = r.bid GROUP BY b.bid";
+        $sql = "SELECT r.rid,b.name, r.roomnumber, COUNT(b.bid) as count, b.bid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.end_time <= '10:00:00' and c.days like '%".$this->day."%') and b.bid = r.bid GROUP BY b.bid";
         $sqlArray = $this->db->getAll($sql);
         $keyArray = array_keys($this->jsonArray);
         //$sqlArray[0]["distance"] = "100";
@@ -119,5 +119,7 @@ class RoomModel extends Model{
             $transactionModel->checkOut($rid);
         
     }
+	
+	
     
 }

@@ -18,9 +18,8 @@
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
-
-      
         <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
+		<a class="layui-btn layui-btn-xs" lay-event="report">Report</a>
         
     </script>
     <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
@@ -113,7 +112,9 @@ layui.use(['table','form'], function() {
                         });
                         return false;
                     });
-                }
+                } else if (obj.event === 'report') {
+					window.location.href = "showReportForm?b= {{$smarty.get.b}}&r=" + data.roomnumber+"&rid="+data.rid;
+				}
             });
 
        $('.demoTable .layui-btn').on('click', function() {

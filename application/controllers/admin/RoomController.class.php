@@ -91,6 +91,22 @@
                 echo json_encode(array('msg'=>3));
             }
         }
+		
+		public function showReportFormAction() {
+            $this->display("report_form.html");
+        }
+		
+		public function submitReportAction() {
+			$reportModel = new ReportModel();
+			$rid = $_POST['rid'];
+			$desc = $_POST['description'];
+			$status = $reportModel->submitReport($rid, $desc);
+			if($status === false) {
+				echo json_encode(array('msg'=>2));
+			} else {
+				echo json_encode(array('msg'=>1));
+			}
+		}
  }
 
     
