@@ -44,7 +44,7 @@ class RoomModel extends Model{
         $this->getTime();
         $this->getDay();
         $bid = $_GET['bid'];
-        $sql = "SELECT DISTINCT r.roomnumber as roomnumber, r.rid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
+        $sql = "SELECT DISTINCT r.roomnumber as roomnumber, r.rid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.end_time <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
         $sqlArray = $this->db->getAll($sql);
 
         return $sqlArray;
@@ -111,14 +111,14 @@ class RoomModel extends Model{
         $transactionModel->checkIn($rid);
 
     }
-    
+
     public function checkOut($rid) {
-        
+
             $transactionModel = new TransactionModel();
             $transactionModel->checkOut($rid);
-        
+
     }
-	
-	
-    
+
+
+
 }
