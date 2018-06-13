@@ -111,14 +111,14 @@ class RoomModel extends Model{
         $transactionModel->checkIn($rid);
 
     }
-    
+
     public function checkOut($rid) {
-        
+
             $transactionModel = new TransactionModel();
             $transactionModel->checkOut($rid);
-        
+
     }
-	
-	
-    
+
+
+
 }
