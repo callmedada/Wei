@@ -1,0 +1,67 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: 2018-06-13 19:16:14
+-- 服务器版本： 10.1.13-MariaDB
+-- PHP Version: 5.5.35
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `wei`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `course`
+--
+
+CREATE TABLE `course` (
+  `id` int(11) NOT NULL,
+  `section` varchar(1) NOT NULL,
+  `term` varchar(1) NOT NULL,
+  `year` year(4) NOT NULL,
+  `course_id` int(4) NOT NULL,
+  `time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `rid` int(11) NOT NULL,
+  `days` varchar(7) NOT NULL,
+  `professor` varchar(30) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `type` int(1) NOT NULL,
+  `course_name` varchar(60) NOT NULL,
+  `course_number` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `course`
+--
+
+INSERT INTO `course` (`id`, `section`, `term`, `year`, `course_id`, `time`, `end_time`, `rid`, `days`, `professor`, `user_id`, `type`, `course_name`, `course_number`) VALUES
+(1, 'A', 'W', 2018, 3, '13:00:00', '15:00:00', 2, '135', 'Jason', 0, 0, 'Information system', 2001),
+(2, 'M', 'W', 2018, 2, '10:00:00', '16:00:00', 4, '135', 'Mike', 0, 0, 'Agorithm', 3101),
+(3, 'Z', 'W', 2018, 2, '10:00:00', '16:00:00', 1, '24', 'Jeff', 0, 0, 'Agorithm', 3101);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- 在导出的表使用AUTO_INCREMENT
+--
+
+--
+-- 使用表AUTO_INCREMENT `course`
+--
+ALTER TABLE `course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
