@@ -17,10 +17,20 @@
     </div>
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <script type="text/html" id="barDemo">
+         {{if $smarty.session.checked == false}}
         <a class="layui-btn layui-btn-xs" lay-event="checkIn">Check In</a>
+        {{else}}
+        <a class="layui-btn layui-btn-xs layui-disabled">Check In</a>
+        {{/if}}
+
+        {{if $smarty.session.checked == true}}
+
         <a class="layui-btn layui-btn-xs" lay-event="checkOut">Check Out</a>
-		<a class="layui-btn layui-btn-xs" lay-event="report">Report</a>
-        
+        {{else}}
+
+         <a class="layui-btn layui-btn-xs layui-disabled">Check Out</a>
+        {{/if}}
+
     </script>
     <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
 
@@ -49,6 +59,7 @@ layui.use(['table','form'], function() {
 
         });
 
+
         //监听表格复选框选择
 		table.on('checkbox(demo)', function(obj){
 			console.log(obj);
@@ -63,21 +74,20 @@ layui.use(['table','form'], function() {
         };
 
         table.on('tool(role)', function(obj) {
-               
+                console.log(obj.data.rid);
                 var data = obj.data;
-                console.log(data.rid);
                 if (obj.event === 'checkIn') {
                     layer.confirm('确定Check In吗？', function(index) {
                         // obj.del();
                         layer.close(index);
                         $.ajax({
-                            url:'checkIn?rid='+data.rid ,
-                            data:{'rid':data.rid},
+                            url:'checkIn?rid='+{{$smarty.get.rid}} ,
+                            data:{'rid':{{$smarty.get.rid}}},
                             type:'POST',
                             dataType:'json',
                             success:function(redata){
                                 if(redata.msg == 2){
-                                    layer.msg("你还没有Check Out");
+                                    layer.msg("Check In Error，请重试");
                                 }else if(redata.msg == 1){
                                     window.location.reload();
                                 }else if(redata.msg == 3){
@@ -91,11 +101,11 @@ layui.use(['table','form'], function() {
                    layer.confirm('确定Check Out吗？', function(index) {
                         // obj.del();
                         layer.close(index);
-                       
+                       console.log(data);
                         $.ajax({
                             url:'checkOut?rid=' + data.rid,
                             //{{$smarty.get.rid}}
-                            data:{'rid': data.rid},
+                            data:{'rid': "1"},
                             type:'POST',
                             dataType:'json',
                             success:function(redata){
@@ -104,15 +114,13 @@ layui.use(['table','form'], function() {
                                 }else if(redata.msg == 1){
                                      window.location.reload();
                                 }else if(redata.msg == 3){
-                                    layer.msg("你还没有Check In");
+                                    layer.msg("Unknown Error!!");
                                 }
                             }
                         });
                         return false;
                     });
-                } else if (obj.event === 'report') {
-					window.location.href = "showReportForm?b= {{$smarty.get.b}}&r=" + data.roomnumber+"&rid="+data.rid;
-				}
+                }
             });
 
        $('.demoTable .layui-btn').on('click', function() {
@@ -131,10 +139,9 @@ layui.use(['table','form'], function() {
             table.render({
 
                 elem: '#table_type',
-                url: '{{$smarty.const.ADMIN_SITE}}Room/getAvailableRoom?bid={{$smarty.get.bid}}',
+                url: '{{$smarty.const.ADMIN_SITE}}Gps/isUserStayCrtBldg',
                 id:'rid',
                 cols: [[
-
                     { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
                     { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
 

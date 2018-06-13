@@ -1,5 +1,5 @@
-<?php 
-    class RoomController extends Controller {
+<?php
+    class RoomController extends Controller{
         public $bid;
         public function __construct() {
             parent::__construct();
@@ -11,22 +11,21 @@
         public function indexAction() {
             $this->display("room_index.html");
         }
-        
-        public function getOccupiedRoomAction() {
+
+        public function getOccupiedRoomAction(){
             $model = new RoomModel();
             $list = $model->getOccupiedRoom();
             $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
             echo $data;
         }
-		
-        public function getAllRoomAction() {
+        public function getAllRoomAction(){
             $model = new RoomModel();
             $list = $model->getAllRoom();
             $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
             echo $data;
         }
-        
-        public function getAvailableRoomNumberAction() {
+
+        public function getAvailableRoomNumberAction(){
             $curPage = isset($_GET['page'])?$_GET['page']:1;
             $limit = isset($_GET['limit'])?$_GET['limit']:10;
             $start = ($curPage-1)*$limit;
@@ -39,27 +38,27 @@
             //var_dump($list);
             echo $data;
         }
-        
+
        public function getDistanceAction() {
             $model = new RoomModel();
             $list = $model->getDistance();
-           
+
             $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
             echo $data;
        }
-        
-        public function getAvailableRoomAction() {
+
+        public function getAvailableRoomAction(){
             $model = new RoomModel();
             $list = $model->getAvailableRoom();
             $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
             echo $data;
-        }
-        
+            }
+
         public function showAvailableRoomAction() {
             $this->bid = $_GET['bid'];
             $this->display("room_avaliable.html", $this->bid);
         }
-        
+
         public function checkInAction() {
 			$tranModel = new TransactionModel();
 			$status = $tranModel->getStatus($_SESSION['username']);
@@ -73,7 +72,7 @@
 			 echo json_encode(array('msg'=>2));
 			}
         }
-        
+
         public function checkOutAction() {
            		$tranModel = new TransactionModel();
 				$status = $tranModel->getStatus($_SESSION['username']);
@@ -109,5 +108,5 @@
 		}
  }
 
-    
+
 ?>

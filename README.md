@@ -1,2 +1,0 @@
-# Wei
-Wei Project

@@ -1,31 +1,31 @@
 <?php
 class TransactionModel extends Model{
-    
+
      /*
         STATUS: 1 - Checked In
                 2 - Checked Out
         */
-       
+
     public $table = 'transaction';
     public $year = '2018';
     public $term = 'S';
     public $date;
     public $in_time;
     public function getTime() {
-        
-        
+
+
         date_default_timezone_set('America/New_York');
         $this->time = date('H:i:s');
         return $this->time;
     }
-    
+
     public function getDate() {
-     
+
         date_default_timezone_set('America/New_York');
         $this->date = date("Y-m-d");
         return $this->date;
     }
-    
+
     public function add($data){
         if(empty($data)){
             return false;
@@ -33,7 +33,7 @@ class TransactionModel extends Model{
             return $this->insert($data);
         }
     }
-    
+
     public function getInfo($where='',$limit='') {
          if($where !=''){
             $where = 'where '.$where;
@@ -49,12 +49,12 @@ class TransactionModel extends Model{
         $sql = "select tid from {$this->table} where rid = {$rid} and status = '1'";
         return $this->db->getOne($sql);
     }
-    
+
      public function getTotal(){
         $sql = "select count(*) as total from {$this->table}";
         return $this->db->getOne($sql);
     }
-    
+
     public function delById($id){
         $id = intval($id);
         if($id<=0){
@@ -63,7 +63,7 @@ class TransactionModel extends Model{
             return $this->delete($id);
         }
     }
-    
+
     public function getById($id){
         $id = intval($id);
         if($id<=0){
@@ -72,7 +72,7 @@ class TransactionModel extends Model{
             return $this->selectByPk($id);
         }
     }
-    
+
      public function edit($data){
         $id = intval($data['tid']);
         if($id<=0){
@@ -81,7 +81,7 @@ class TransactionModel extends Model{
             return $this->update($data);
         }
     }
-    
+
        public function checkIn($rid) {
            $userModel = new UserModel();
            $username = $_SESSION['username'];
@@ -106,7 +106,7 @@ class TransactionModel extends Model{
          $data['out_time'] = $this->getTime();
          $data['status'] = 2;
          return $this->update($data);
-         
+
     }
 	
 	public function getStatus($username) {
