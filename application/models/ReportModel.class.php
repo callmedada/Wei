@@ -35,7 +35,7 @@ class ReportModel extends Model{
         if($limit != ''){
             $limit = 'limit '.$limit;
         }
-        $sql = "select * from {$this->table} $where order by tid asc {$limit}";
+        $sql = "select * from {$this->table} $where order by reid asc {$limit}";
         return $this->db->getAll($sql);
     }
     
