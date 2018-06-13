@@ -18,7 +18,7 @@
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <script type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
-        <a class="layui-btn layui-btn-xs" lay-event="edit">显示所有房间</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">显示可用房间</a>
 
     </script>
     <script src="{{$smarty.const.JS}}layui/layui.js" charset="utf-8"></script>
@@ -62,7 +62,7 @@ function getLocation() {
         //方法级渲染
         table.render({
             elem: '#table_type',
-            url: '{{$smarty.const.ADMIN_SITE}}Room/getAvaliableRoomNumber?'+'x=' + x + "&y=" + y ,
+            url: '{{$smarty.const.ADMIN_SITE}}Room/getAvailableRoomNumber?'+'x=' + x + "&y=" + y ,
             cols: [[
 
                 { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
@@ -87,12 +87,12 @@ function getLocation() {
             if (obj.event === 'edit') {
                 layer.open({
                     type: 2,
-                    title: "显示所有房间",
+                    title: "显示可用房间",
                     area: ['700px', '450px'],
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
                     maxmin: true,//窗口最大最小化按钮
-                    content: 'showAvaliableRoom?bid='+obj.data.bid
+                    content: 'showAvailableRoom?bid='+obj.data.bid+'&rid='+obj.data.rid
                 });
             }
         });

@@ -25,13 +25,13 @@
             echo $data;
         }
 
-        public function getAvaliableRoomNumberAction(){
+        public function getAvailableRoomNumberAction(){
             $curPage = isset($_GET['page'])?$_GET['page']:1;
             $limit = isset($_GET['limit'])?$_GET['limit']:10;
             $start = ($curPage-1)*$limit;
 
             $model = new RoomModel();
-            $list = $model->getAvaliableRoomNumber();
+            $list = $model->getAvailableRoomNumber();
             $total = $model->getTotal();
             asort($list);
             $data = json_encode(array("count"=>$total,"msg"=>"","code"=>0,"data"=>$list));
@@ -49,19 +49,34 @@
 
         public function getAvailableRoomAction(){
             $model = new RoomModel();
-            $list = $model->getAvaliableRoom();
+            $list = $model->getAvailableRoom();
             $data = json_encode(array("count"=>sizeof($list),"msg"=>"","code"=>0,"data"=>$list));
             echo $data;
             }
 
-        public function showAvaliableRoomAction() {
+        public function showAvailableRoomAction() {
             $this->bid = $_GET['bid'];
             $this->display("room_avaliable.html", $this->bid);
         }
 
-
+        public function checkInAction() {
+            $model = new RoomModel();
+            $rid = $_GET['rid'];
+            $model->checkIn($rid);
+             echo json_encode(array('msg'=>1));
         }
 
+        public function checkOutAction() {
+            if($_SESSION["checked"] == true && $_SESSION['rid'] == $_GET['rid']) {
+                $model = new RoomModel();
+                $model->checkOut();
+                $_SESSION['checked'] = false;
+                echo json_encode(array('msg'=>1));
+            } else {
+                echo json_encode(array('msg'=>2));
+            }
+        }
+ }
 
 
 ?>

@@ -11,18 +11,25 @@
 <body>
     <form class="layui-form" action="">
         {{if $smarty.get.act == "edit"}} <input type="hidden" name="id" value="{{$list.id}}">{{/if}}
+       <div class="layui-form-item" style="display: none">
+            <label class="layui-form-label">tid</label>
+            <div class="layui-input-inline">
+                <input type="text" name="tid" lay-verify="tid" placeholder="请输入tid" autocomplete="off" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.tid}}"{{/if}}>
+            </div>
+           
+        </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">uid</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="uid" lay-verify="title" {{if $smarty.get.act == "edit"}} readonly {{/if}} autocomplete="off" placeholder="请输入uid" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.name}}"{{/if}}>
+                    <input type="text" name="uid" lay-verify="title" {{if $smarty.get.act == "edit"}} readonly {{/if}} autocomplete="off" placeholder="请输入uid" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.uid}}"{{/if}}>
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">year</label>
             <div class="layui-input-inline">
-                <input type="text" name="year" lay-verify="year" placeholder="请输入year" autocomplete="off" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.pwd}}"{{/if}}>
+                <input type="text" name="year" lay-verify="year" placeholder="请输入year" autocomplete="off" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.year}}"{{/if}}>
             </div>
            
         </div>
@@ -30,7 +37,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">term</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="term" lay-verify="alias" autocomplete="off" placeholder="请输入term" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.alias}}"{{/if}}>
+                    <input type="text" name="term" lay-verify="alias" autocomplete="off" placeholder="请输入term" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.term}}"{{/if}}>
                 </div>
             </div>
         </div>
@@ -38,7 +45,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">date</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="date" lay-verify="major" autocomplete="off" placeholder="请输入date" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.major}}"{{/if}}>
+                    <input type="text" name="date" lay-verify="major" autocomplete="off" placeholder="请输入date" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.date}}"{{/if}}>
                 </div>
             </div>
         </div>
@@ -46,7 +53,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">in_time</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="intime" lay-verify="avatar" autocomplete="off" placeholder="请输入in_time" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="intime" lay-verify="avatar" autocomplete="off" placeholder="请输入in_time" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.in_time}}"{{/if}}>
                 </div>
             </div>
         </div>
@@ -55,7 +62,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">out_time</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="outtime" lay-verify="avatar" autocomplete="off" placeholder="请输入out_time" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="outtime" lay-verify="avatar" autocomplete="off" placeholder="请输入out_time" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.out_time}}"{{/if}}>
                 </div>
             </div>
         </div>
@@ -63,7 +70,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">rid</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="rid" lay-verify="avatar" autocomplete="off" placeholder="请输入rid" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="rid" lay-verify="avatar" autocomplete="off" placeholder="请输入rid" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.rid}}"{{/if}}>
                 </div>
             </div>
         </div>
@@ -71,7 +78,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">status</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="status" lay-verify="avatar" autocomplete="off" placeholder="请输入status" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.avatar}}"{{/if}}>
+                    <input type="text" name="status" lay-verify="avatar" autocomplete="off" placeholder="请输入status" class="layui-input" {{if $smarty.get.act == "edit"}} value="{{$list.status}}"{{/if}}>
                 </div>
             </div>
         </div>
@@ -130,8 +137,9 @@
             return false;
         });
         form.on('submit(edit)', function(data){
+          console.log(data.field.tid);
             $.ajax({
-                url:'edit',
+                url:'edit?tid=' + data.field.tid,
                 data:data.field,
                 type:'post',
                 dataType:'json',

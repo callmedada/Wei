@@ -6,9 +6,10 @@ class RoomModel extends Model{
     public $day;
     public $jsonArray = array();
     public function getTime() {
+
         date_default_timezone_set('America/New_York');
         $this->time = date('H:i:s');
-
+        return $this->time;
     }
 
     public function getDay() {
@@ -17,7 +18,8 @@ class RoomModel extends Model{
         $this->day = date('w');
 
     }
-    public function getOccupiedRoom(){
+
+     public function getOccupiedRoom(){
       $this->getTime();
       $bid = $_GET['bid'];
       // $bid = "1";
@@ -30,41 +32,38 @@ class RoomModel extends Model{
         // for($i = 0; $i < sizeof($sqlArray); $i++) {
         //   $sqlArray[$i]=$sqlArray;
         // }
-  // var_dump($sqlArray);
-        return $sqlArray;
-    }
-
-    public function getAvaliableRoom() {
-        $this->getTime();
-        $this->getDay();
-        $bid = $_GET['bid'];
-        // $bid = "1";
-
-        $sql = "SELECT DISTINCT r.roomnumber as roomnumber FROM building b, room r
-         WHERE r.rid not in ( SELECT c.rid from course c
-           WHERE c.time <= '".$this->time."' and c.endtime >= '".$this->time."' and c.days like '%".$this->day."%') and r.bid = ".$bid;
-        $sqlArray = $this->db->getAll($sql);
+        // var_dump($sqlArray);
         return $sqlArray;
     }
 
     public function getAllRoom(){
-        return  $this->getAvaliableRoom() + $this->getOccupiedRoom();
+        return  $this->getAvailableRoom() + $this->getOccupiedRoom();
         // return $this->getOccupiedRoom();
     }
 
-    public function getAvaliableRoomNumber(){
+    public function getAvailableRoom() {
+        $this->getTime();
+        $this->getDay();
+        $bid = $_GET['bid'];
+        $sql = "SELECT DISTINCT r.roomnumber as roomnumber, r.rid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and r.bid = ".$bid;
+        $sqlArray = $this->db->getAll($sql);
+
+        return $sqlArray;
+    }
+
+
+    public function getAvailableRoomNumber(){
         $this->getDistance();
         $this->getTime();
         $this->getDay();
-        $sql = "SELECT r.rid,b.name, r.roomnumber, COUNT(b.bid) as count, b.bid FROM building b, room r
-        WHERE r.rid not in ( SELECT c.rid from course c
-          WHERE c.time >= c.time <= '".$this->time."' and c.endtime >= '".$this->time."' and c.days like '%".$this->day."%')
-          and b.bid = r.bid GROUP BY b.bid";
+        $_SESSION['checked'] = false;
+        $sql = "SELECT r.rid,b.name, r.roomnumber, COUNT(b.bid) as count, b.bid FROM building b, room r WHERE r.rid not in ( SELECT c.rid from course c WHERE c.time >= '".$this->time."' and c.endtime <= '10:00:00' and c.days like '%".$this->day."%') and b.bid = r.bid GROUP BY b.bid";
         $sqlArray = $this->db->getAll($sql);
         $keyArray = array_keys($this->jsonArray);
         //$sqlArray[0]["distance"] = "100";
 //        var_dump($sqlArray[0]["name"]);
 //        var_dump($keyArray[0]);
+
 
         //添加distance到sql输出结果中
         for($i = 0; $i < sizeof($sqlArray); $i++) {
@@ -76,7 +75,7 @@ class RoomModel extends Model{
             }
         }
 
-          // var_dump($sqlArray);
+          //var_dump($sqlArray);
         return $sqlArray;
     }
 
@@ -106,6 +105,22 @@ class RoomModel extends Model{
             asort($this->jsonArray, SORT_NUMERIC);
 
             return $this->jsonArray;
-        }
+    }
+
+    public function checkIn($rid) {
+        $transactionModel = new TransactionModel();
+        $_SESSION['rid'] = $rid;
+        $_SESSION['checked'] = true;
+        $_SESSION['checkin_time'] = $this->getTime();
+        $transactionModel->checkIn($rid);
+
+    }
+
+    public function checkOut() {
+
+            $transactionModel = new TransactionModel();
+            $transactionModel->checkOut();
+
+    }
 
 }

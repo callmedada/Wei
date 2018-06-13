@@ -139,10 +139,9 @@ layui.use(['table','form'], function() {
             table.render({
 
                 elem: '#table_type',
-                url: '{{$smarty.const.ADMIN_SITE}}Room/getAvailableRoom?bid={{$smarty.get.bid}}',
+                url: '{{$smarty.const.ADMIN_SITE}}Gps/isUserStayCrtBldg',
                 id:'rid',
                 cols: [[
-
                     { field: 'roomnumber', title: 'Room Number', sort: true, fixed: true, align: 'center' },
                     { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
 

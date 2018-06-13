@@ -1,6 +1,6 @@
 <?php 
     class UserController extends Controller{
-        
+
         public function __construct(){
             parent::__construct();
             if(!isset($_SESSION['username'])){
@@ -24,14 +24,14 @@
             $roleModel = new RoleModel();
             $role = $roleModel->getInfo("","");
             for($j=0; $j<count($list); $j++){
-                for ($i=0; $i < count($role); $i++) { 
+                for ($i=0; $i < count($role); $i++) {
                     if ($list[$j]['role_id'] == $role[$i]['id']) {
                         $list[$j]['role_id'] = $role[$i]['name'];
                     }
                 }
             }
             $data = json_encode(array("count"=>$total,"msg"=>"","code"=>0,"data"=>$list));
-            
+
             echo $data;
         }
 
@@ -47,7 +47,7 @@
                 $data['role_id'] = $_POST['role_id'];
                 // $data['email'] = $_POST['email'];
                 // $data['phone'] = $_POST['phone'];
-                
+
                 $list = $model->getInfo("","");//获取所有账号信息
                 foreach ($list as $v) {
                     //传过来的账号名已有账号名当中
@@ -82,7 +82,7 @@
                 $data['role_id'] = $_POST['role_id'];
                 // $data['email'] = $_POST['email'];
                 // $data['phone'] = $_POST['phone'];
-                
+
                 $list = $model->getInfo("","");//获取所有账号信息
                 $man = $model->getById($_POST['id']);//获取当前账号信息
                 foreach ($list as $v) {
@@ -127,7 +127,7 @@
                     }else{
                         echo json_encode(array('msg'=>2));
                     }
-                } 
+                }
             }
         }
         /**
@@ -142,8 +142,8 @@
                 if ($info['name'] == $_SESSION['username']) {
                     $n++;
                 }else{
-                   $del = $model->delById($id); 
-               }           
+                   $del = $model->delById($id);
+               }
             }
             if ($n > 0) {
                 echo json_encode(array('msg'=>2));

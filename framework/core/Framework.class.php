@@ -64,7 +64,7 @@ class Framework{
 		include LIB_PATH . "PHPExcel".DS."Export.class.php";
 		include LIB_PATH . "aliyun".DS."SmsDemo.class.php";
 	}
-	
+
     //定义路由分发方法,说白了，就是实例化对象并调用方法
 	//index.php?m=admin&c=goods&a=add GoodsController中的addAction
 	private static function dispatch(){
@@ -77,13 +77,13 @@ class Framework{
 		//调用方法
 		$controller->$action_name();
 	}
-	
+
 	//注册为自动加载
 	private static function autoload(){
 	    // $arr = array(__CLASS__,'load');
 	    spl_autoload_register('self::load');
 	}
-	
+
 	//自动加载功能,此处我们只实现控制器和数据库模型的自动加载
 	//如GoodsController、 GoodsModel
 	private static function load($classname){

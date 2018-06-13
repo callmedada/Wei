@@ -11,6 +11,7 @@
     	<button class="layui-btn" data-type="add"><i class="layui-icon">&#xe654;</i></button>
         <button class="layui-btn" data-type="delCheckData"><i class="layui-icon">&#xe640;</i></button>
         <button class="layui-btn" data-type="refresh"><i class="layui-icon">&#x1002;</i></button>
+        
     </div>
     <table class="layui-hide" id="table_type" lay-filter="role"></table>
     <script type="text/html" id="barDemo">
@@ -27,14 +28,19 @@
         //方法级渲染
         table.render({
             elem: '#table_type',
-            url: '{{$smarty.const.ADMIN_SITE}}Room/getOccupiedRoom',
+            url: '{{$smarty.const.ADMIN_SITE}}Transaction/getInfo',
             cols: [[
                 { checkbox: true, fixed: true },
                 { field: 'tid', title: 'TID', sort: true, fixed: true, align: 'center' },
-                { field: 'rid', title: 'Room ID', sort: true, fixed: true, align: 'center' },
-                { field: 'name', title: 'Building', sort: true, fixed: true, align: 'center' },
-                { field: 'count', title: 'Number of Avaliable Room', sort: true, align: 'center' },
-
+                { field: 'uid', title: 'UID', sort: true, align: 'center' },
+                { field: 'year', title: 'YEAR', sort: true, align: 'center' },
+                { field: 'term', title: 'TERM', sort: true, align: 'center' },
+                { field: 'date', title: 'DATE', sort: false, align: 'center' },
+                { field: 'in_time', title: 'IN_TIME', sort: false, align: 'center' },
+                { field: 'out_time', title: 'OUT_TIME', sort: true, align: 'center' },
+                { field: 'status', title: 'STATUS', align: 'center' },
+                { fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo' }
+               
             ]],
             id: 'idTest',
             page: true,
@@ -50,12 +56,12 @@
             console.log(obj)
             var data = obj.data;
             if (obj.event === 'del') {
-                layer.confirm('确定删除该用户吗？', function(index) {
+                layer.confirm('确定删除该数据吗？', function(index) {
                     // obj.del();
                     layer.close(index);
                     $.ajax({
-                    	url:'del?id='+data.id,
-                    	data:{id:data.id,name:data.name},
+                    	url:'del?id='+data.tid,
+                    	data:{id:data.tid,name:data.name},
                     	type:'post',
                     	dataType:'json',
                     	success:function(redata){
@@ -78,7 +84,7 @@
                     fixed: false, //不固定
                     closeBtn: 1,//关闭窗口按钮
                     maxmin: true,//窗口最大最小化按钮
-                    content: 'edit?id='+data.id+'&act=edit'
+                    content: 'edit?tid='+data.tid+'&act=edit'
                 });
             }
         });
@@ -87,7 +93,7 @@
         	add: function() {
         		layer.open({
 					type: 2,
-					title: "添加后台账号",
+					title: "添加Transaction",
 					area: ['700px', '450px'],
 					fixed: false, //不固定
 					closeBtn: 1,//关闭窗口按钮
@@ -99,6 +105,7 @@
                 window.location.reload();
             },
             delCheckData: function() { //删除选中数据
+                
                 var checkStatus = table.checkStatus('idTest'),
                     data = checkStatus.data;
                 if (data.length == 0) {
@@ -107,13 +114,13 @@
                     layer.confirm('确定删除该数据吗？', function(index) {
                     	var ids = [];
 	                    for(var i=0;i<data.length;i++){
-	                    	ids.push(data[i].id);
+	                    	ids.push(data[i].tid);
 	                    }
 	                    $.post('delete',{data:ids},function(redata){
                             if (redata.msg==1) {
                                 window.location.href="index";
                             }else if (redata.msg==2){
-                                layer.confirm("删除的数据当中含有当前登录账号，无法删除！",function(){
+                                layer.confirm("无法删除！",function(){
                                     window.location.reload();
                                 });
                             }
@@ -127,7 +134,7 @@
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-
+        
     });
     </script>
 </body>
